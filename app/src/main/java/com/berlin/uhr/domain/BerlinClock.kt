@@ -2,9 +2,10 @@ package com.berlin.uhr.domain
 
 import com.berlin.uhr.domain.model.BerlinClockValue
 import com.berlin.uhr.domain.model.Lamps
+import javax.inject.Inject
 
 
-class BerlinClock {
+class BerlinClock @Inject constructor() {
 
     fun convert(time: String): BerlinClockValue {
         val splitTime = time.split(":")
