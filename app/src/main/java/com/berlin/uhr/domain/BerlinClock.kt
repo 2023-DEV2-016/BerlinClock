@@ -11,11 +11,28 @@ class BerlinClock {
         val seconds = convertSeconds(splitTime[2].toInt())
         val fiveHours = convert5hoursLamps(splitTime[0].toInt())
         val oneHour = convert1hoursLamps(splitTime[0].toInt())
+        val fiveMinutes = convert5minutesLamps(splitTime[1].toInt())
 
-        return BerlinClockValue(seconds, fiveHours, oneHour, arrayListOf(), arrayListOf())
+        return BerlinClockValue(seconds, fiveHours, oneHour, fiveMinutes, arrayListOf())
     }
 
-    private fun convert1hoursLamps(hours: Int): java.util.ArrayList<Lamps> {
+    private fun convert5minutesLamps(minutes: Int): ArrayList<Lamps> {
+        val fiveMinutesLamps = minutes / 5
+        val list = arrayListOf<Lamps>()
+        for (i in 1..11) {
+            list.add(
+                if (i <= fiveMinutesLamps) {
+                    if(i % 3 == 0)
+                        Lamps.RED
+                    else Lamps.YELLOW
+                }
+                else Lamps.OFF
+            )
+        }
+        return list
+    }
+
+    private fun convert1hoursLamps(hours: Int): ArrayList<Lamps> {
         return convertHours(hours % 5)
     }
 

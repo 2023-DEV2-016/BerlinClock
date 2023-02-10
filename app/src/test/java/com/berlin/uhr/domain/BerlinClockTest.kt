@@ -98,4 +98,49 @@ class BerlinClockTest {
 
         Assert.assertEquals(expected, actual.oneHour)
     }
+
+    @Test
+    fun `test 5 minutes lamps with all lamps illuminated`() {
+        val time = "17:56:12"
+        val expected = arrayListOf(
+            Lamps.YELLOW,Lamps.YELLOW,Lamps.RED,Lamps.YELLOW,
+            Lamps.YELLOW,Lamps.RED,Lamps.YELLOW,Lamps.YELLOW,
+            Lamps.RED,Lamps.YELLOW,Lamps.YELLOW
+        )
+
+        val actual = berlinClock.convert(time)
+
+
+        Assert.assertEquals(expected, actual.fiveMinutes)
+    }
+
+    @Test
+    fun `test 5 minutes lamps with all lamps are off`() {
+        val time = "17:00:12"
+        val expected = arrayListOf(
+            Lamps.OFF,Lamps.OFF,Lamps.OFF,Lamps.OFF,
+            Lamps.OFF,Lamps.OFF,Lamps.OFF,Lamps.OFF,
+            Lamps.OFF,Lamps.OFF,Lamps.OFF
+        )
+
+        val actual = berlinClock.convert(time)
+
+
+        Assert.assertEquals(expected, actual.fiveMinutes)
+    }
+
+    @Test
+    fun `test 5 minutes lamps with partial lamps illuminated`() {
+        val time = "17:32:12"
+        val expected = arrayListOf(
+            Lamps.YELLOW,Lamps.YELLOW,Lamps.RED,Lamps.YELLOW,
+            Lamps.YELLOW,Lamps.RED,Lamps.OFF,Lamps.OFF,
+            Lamps.OFF,Lamps.OFF,Lamps.OFF
+        )
+
+        val actual = berlinClock.convert(time)
+
+
+        Assert.assertEquals(expected, actual.fiveMinutes)
+    }
 }
