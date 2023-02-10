@@ -9,13 +9,23 @@ class BerlinClock {
     fun convert(time: String): BerlinClockValue {
         val splitTime = time.split(":")
         val seconds = convertSeconds(splitTime[2].toInt())
-        val hours = convert5hoursLamps(splitTime[0].toInt())
+        val fiveHours = convert5hoursLamps(splitTime[0].toInt())
+        val onceHour = convert1hoursLamps(splitTime[0].toInt())
 
-        return BerlinClockValue(seconds, hours, arrayListOf(), arrayListOf(), arrayListOf())
+        return BerlinClockValue(seconds, fiveHours, onceHour, arrayListOf(), arrayListOf())
+    }
+
+    private fun convert1hoursLamps(hours: Int): java.util.ArrayList<Lamps> {
+        val hourLamps = hours % 5
+        return convertHours(hourLamps)
     }
 
     private fun convert5hoursLamps(hours: Int): ArrayList<Lamps> {
         val hourLamps = hours / 5
+        return convertHours(hourLamps)
+    }
+
+    private fun convertHours(hourLamps: Int): ArrayList<Lamps> {
         val list = arrayListOf<Lamps>()
         for (i in 1..4) {
             list.add(
