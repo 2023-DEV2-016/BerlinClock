@@ -2,10 +2,10 @@ package com.berlin.uhr.domain.model
 
 
 data class BerlinClockUiState(
-    val seconds: Lamps,
-    val fiveHours: ArrayList<Lamps>,
-    val oneHour: ArrayList<Lamps>,
-    val fiveMinutes: ArrayList<Lamps>,
-    val oneMinute: ArrayList<Lamps>,
-    val normalTime: String
+    val seconds: Lamps = Lamps.OFF,
+    val fiveHours: ArrayList<Lamps> = arrayListOf(),
+    val oneHour: ArrayList<Lamps> = arrayListOf(),
+    val fiveMinutes: ArrayList<Lamps> = arrayListOf(),
+    val oneMinute: ArrayList<Lamps> = arrayListOf(),
+    val normalTime: String? = null
 )
