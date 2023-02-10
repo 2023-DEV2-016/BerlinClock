@@ -4,6 +4,7 @@ import androidx.annotation.VisibleForTesting
 import com.berlin.uhr.domain.model.BerlinClockValue
 import com.berlin.uhr.domain.model.BerlinClockUiState
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,8 +16,8 @@ class BerlinClockUseCase @Inject constructor(
 ) {
 
 
-    fun initConversion() {
-        flow {
+    fun initConversion(): Flow<BerlinClockUiState> {
+        return flow {
             while (true) {
                 emit(convert())
                 delay(1000L)
