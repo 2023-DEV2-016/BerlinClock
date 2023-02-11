@@ -45,34 +45,7 @@ fun BerlinClockScreen(
 @Composable
 fun DrawMinuteLamps(modifier: Modifier, clockUiState: BerlinClockUiState) {
     DrawElevenLampsRow(modifier, clockUiState.fiveMinutes)
-    AddFourLampsMinutesRow(modifier, clockUiState.oneMinute)
-}
-
-@Composable
-fun AddFourLampsMinutesRow(modifier: Modifier, list: ArrayList<Lamps>) {
-    if (list.size == 0) return
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
-    ) {
-        repeat(4) {
-            Column(
-                modifier = modifier
-                    .padding(0.dp, 0.dp, 8.dp, 0.dp)
-            ) {
-                Box(
-                    modifier = modifier.testTag("oneMinute$it")
-                        .padding(0.dp, 8.dp, 0.dp, 8.dp)
-                        .size(80.dp, 50.dp)
-                        .clip(RectangleShape)
-                        .border(2.dp, Color.DarkGray, RectangleShape)
-                        .background(
-                            Color(parseColor(list[it].color))
-                        )
-                )
-            }
-        }
-    }
+    DrawFourLampsRow(modifier, clockUiState.oneMinute, "oneMinute")
 }
 
 @Composable
@@ -84,67 +57,47 @@ fun DrawElevenLampsRow(modifier: Modifier, list: ArrayList<Lamps>) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(11) {
-            AddElevenLamps(list[it], modifier, "fiveMinutes$it")
+            DrawElevenLamps(list[it], modifier, "fiveMinutes$it")
         }
     }
 }
 
 @Composable
-fun AddElevenLamps(lamp: Lamps, modifier: Modifier, tag: String) {
+fun DrawElevenLamps(lamp: Lamps, modifier: Modifier, tag: String) {
     Column(
-        modifier = modifier.padding(0.dp, 0.dp, 2.dp, 0.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        modifier = modifier.padding(0.dp, 0.dp, 2.dp, 0.dp)
     ) {
-        Box(
-            modifier = modifier.testTag(tag)
-                .padding(0.dp, 8.dp, 0.dp, 8.dp)
-                .size(30.dp, 50.dp)
-                .clip(RectangleShape)
-                .border(2.dp, Color.DarkGray, RectangleShape)
-                .background(
-                    Color(parseColor(lamp.color))
-                )
-        )
+        drawRectangle(modifier, tag, lamp, 30)
     }
 }
 
 @Composable
 fun DrawHourLamps(modifier: Modifier, clockUiState: BerlinClockUiState) {
-    AddFourLampsHourRow(modifier, clockUiState.fiveHours,"fiveHourLamp")
-    AddFourLampsHourRow(modifier, clockUiState.oneHour, "oneHourLamp")
+    DrawFourLampsRow(modifier, clockUiState.fiveHours,"fiveHourLamp")
+    DrawFourLampsRow(modifier, clockUiState.oneHour, "oneHourLamp")
 }
 
 @Composable
-fun AddFourLampsHourRow(modifier: Modifier, list: ArrayList<Lamps>, tag: String) {
+fun DrawFourLampsRow(modifier: Modifier, list: ArrayList<Lamps>, tag: String) {
     if (list.size == 0) return
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
         repeat(4) {
-            AddLamps(list[it], modifier, "$tag$it")
+            DrawLamps(list[it], modifier, "$tag$it")
         }
     }
 
 }
 
 @Composable
-fun AddLamps(lamp: Lamps, modifier: Modifier, tag: String) {
+fun DrawLamps(lamp: Lamps, modifier: Modifier, tag: String) {
     Column(
         modifier = modifier
             .padding(0.dp, 0.dp, 8.dp, 0.dp)
     ) {
-        Box(
-            modifier = modifier.testTag(tag)
-                .padding(0.dp, 8.dp, 0.dp, 8.dp)
-                .size(80.dp, 50.dp)
-                .clip(RectangleShape)
-                .border(2.dp, Color.DarkGray, RectangleShape)
-                .background(
-                    Color(parseColor(lamp.color))
-                )
-        )
+        drawRectangle(modifier, tag, lamp, 80)
     }
 }
 
@@ -168,6 +121,27 @@ fun DrawSecondsLamp(modifier: Modifier, seconds: Lamps) {
             .border(2.dp, Color.DarkGray, CircleShape)
             .background(
                 Color(parseColor(seconds.color))
+            )
+    )
+}
+
+@Composable
+private fun drawRectangle(
+    modifier: Modifier,
+    tag: String,
+    lamp: Lamps,
+    width: Int,
+    height: Int = 50
+) {
+    Box(
+        modifier = modifier
+            .testTag(tag)
+            .padding(0.dp, 8.dp, 0.dp, 8.dp)
+            .size(width.dp, height.dp)
+            .clip(RectangleShape)
+            .border(2.dp, Color.DarkGray, RectangleShape)
+            .background(
+                Color(parseColor(lamp.color))
             )
     )
 }
