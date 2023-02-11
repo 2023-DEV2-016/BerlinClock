@@ -1,5 +1,6 @@
 package com.berlin.uhr.ui
 
+import android.graphics.Color.parseColor
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -66,8 +67,7 @@ fun AddFourLampsMinutesRow(modifier: Modifier, list: ArrayList<Lamps>) {
                         .clip(RectangleShape)
                         .border(2.dp, Color.DarkGray, RectangleShape)
                         .background(
-                            if (list[it] == Lamps.YELLOW)
-                                Color.Yellow else Color.White
+                            Color(parseColor(list[it].color))
                         )
                 )
             }
@@ -103,11 +103,7 @@ fun AddElevenLamps(lamp: Lamps, modifier: Modifier, tag: String) {
                 .clip(RectangleShape)
                 .border(2.dp, Color.DarkGray, RectangleShape)
                 .background(
-                    when (lamp) {
-                        Lamps.RED -> Color.Red
-                        Lamps.YELLOW -> Color.Yellow
-                        else -> Color.White
-                    }
+                    Color(parseColor(lamp.color))
                 )
         )
     }
@@ -146,8 +142,7 @@ fun AddLamps(lamp: Lamps, modifier: Modifier, tag: String) {
                 .clip(RectangleShape)
                 .border(2.dp, Color.DarkGray, RectangleShape)
                 .background(
-                    if (lamp == Lamps.RED)
-                        Color.Red else Color.White
+                    Color(parseColor(lamp.color))
                 )
         )
     }
@@ -172,8 +167,7 @@ fun DrawSecondsLamp(modifier: Modifier, seconds: Lamps) {
             .clip(CircleShape)
             .border(2.dp, Color.DarkGray, CircleShape)
             .background(
-                if (seconds == Lamps.RED)
-                    Color.Red else Color.White
+                Color(parseColor(seconds.color))
             )
     )
 }
