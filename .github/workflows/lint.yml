@@ -13,5 +13,6 @@ jobs:
       - name: Run Super-Linter
         uses: github/super-linter@v3.17.0
         env:
+          FILTER_REGEX_EXCLUDE: .*gradlew.*
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
