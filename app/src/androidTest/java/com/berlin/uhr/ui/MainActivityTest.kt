@@ -11,7 +11,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityTest {
 
@@ -19,7 +18,7 @@ class MainActivityTest {
     val composeTestRule = createAndroidComposeRule<MainActivity>()
 
     @Before
-    fun setUp(){
+    fun setUp() {
         composeTestRule.activity.setContent {
             BerlinClockTheme {
                 BerlinClockScreen()
@@ -36,5 +35,4 @@ class MainActivityTest {
         composeTestRule.onNodeWithTag("fiveMinutes1").assertIsDisplayed()
         composeTestRule.onNodeWithTag("oneMinute1").assertIsDisplayed()
     }
-
 }

@@ -6,20 +6,22 @@ import com.berlin.uhr.domain.BerlinClockUseCase
 import com.berlin.uhr.domain.model.BerlinClockUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val useCase: BerlinClockUseCase
-): ViewModel() {
+    private val useCase: BerlinClockUseCase,
+) : ViewModel() {
 
     private val _berlinClockState = MutableStateFlow(BerlinClockUiState())
     val berlinClockState: StateFlow<BerlinClockUiState> = _berlinClockState.asStateFlow()
 
     init {
-       startConversion()
+        startConversion()
     }
 
     private fun startConversion() {

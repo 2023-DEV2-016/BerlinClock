@@ -4,7 +4,6 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-
 class BerlinClockUseCaseTest {
 
     private lateinit var useCase: BerlinClockUseCase
@@ -13,7 +12,6 @@ class BerlinClockUseCaseTest {
     fun setUp() {
         useCase = BerlinClockUseCase(BerlinClock())
     }
-
 
     @Test
     fun `test convert to berlin clock`() {

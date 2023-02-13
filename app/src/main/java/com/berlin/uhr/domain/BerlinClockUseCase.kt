@@ -1,8 +1,8 @@
 package com.berlin.uhr.domain
 
 import androidx.annotation.VisibleForTesting
-import com.berlin.uhr.domain.model.BerlinClockValue
 import com.berlin.uhr.domain.model.BerlinClockUiState
+import com.berlin.uhr.domain.model.BerlinClockValue
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -10,11 +10,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-
 class BerlinClockUseCase @Inject constructor(
     private val berlinClock: BerlinClock,
 ) {
-
 
     fun initConversion(): Flow<BerlinClockUiState> {
         return flow {
@@ -28,7 +26,7 @@ class BerlinClockUseCase @Inject constructor(
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun convert(): BerlinClockUiState {
         val time = formatTime(Calendar.getInstance().timeInMillis)
-        return toBerlinClockUiState(berlinClock.convert(time),time)
+        return toBerlinClockUiState(berlinClock.convert(time), time)
     }
 
     private fun toBerlinClockUiState(berlinClockValue: BerlinClockValue, time: String) =
@@ -38,10 +36,10 @@ class BerlinClockUseCase @Inject constructor(
             oneHour = berlinClockValue.oneHour,
             fiveMinutes = berlinClockValue.fiveMinutes,
             oneMinute = berlinClockValue.oneMinute,
-            normalTime = time
+            normalTime = time,
         )
 
-    private fun formatTime(time:Long): String =
+    private fun formatTime(time: Long): String =
         SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
             .format(Date(time))
 }

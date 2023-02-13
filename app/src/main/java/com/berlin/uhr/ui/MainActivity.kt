@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             BerlinClockTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colors.background,
                 ) {
                     BerlinClockScreen()
                 }

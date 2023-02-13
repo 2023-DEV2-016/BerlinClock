@@ -3,7 +3,13 @@ package com.berlin.uhr.ui
 import android.graphics.Color.parseColor
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +28,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.berlin.uhr.domain.model.BerlinClockUiState
 import com.berlin.uhr.domain.model.Lamps
 
-
 @Composable
 fun BerlinClockScreen(
     modifier: Modifier = Modifier,
@@ -32,7 +37,7 @@ fun BerlinClockScreen(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         DrawNormalTime(modifier, clockUiState.normalTime)
         DrawSecondsLamp(modifier, clockUiState.seconds)
@@ -40,7 +45,6 @@ fun BerlinClockScreen(
         DrawMinuteLamps(modifier, clockUiState)
     }
 }
-
 
 @Composable
 fun DrawMinuteLamps(modifier: Modifier, clockUiState: BerlinClockUiState) {
@@ -54,7 +58,7 @@ fun DrawElevenLampsRow(modifier: Modifier, list: ArrayList<Lamps>) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         repeat(11) {
             DrawElevenLamps(list[it], modifier, "fiveMinutes$it")
@@ -65,15 +69,15 @@ fun DrawElevenLampsRow(modifier: Modifier, list: ArrayList<Lamps>) {
 @Composable
 fun DrawElevenLamps(lamp: Lamps, modifier: Modifier, tag: String) {
     Column(
-        modifier = modifier.padding(0.dp, 0.dp, 2.dp, 0.dp)
+        modifier = modifier.padding(0.dp, 0.dp, 2.dp, 0.dp),
     ) {
-        drawRectangle(modifier, tag, lamp, 30)
+        DrawRectangle(modifier, tag, lamp, 30)
     }
 }
 
 @Composable
 fun DrawHourLamps(modifier: Modifier, clockUiState: BerlinClockUiState) {
-    DrawFourLampsRow(modifier, clockUiState.fiveHours,"fiveHourLamp")
+    DrawFourLampsRow(modifier, clockUiState.fiveHours, "fiveHourLamp")
     DrawFourLampsRow(modifier, clockUiState.oneHour, "oneHourLamp")
 }
 
@@ -82,22 +86,21 @@ fun DrawFourLampsRow(modifier: Modifier, list: ArrayList<Lamps>, tag: String) {
     if (list.size == 0) return
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        horizontalArrangement = Arrangement.Center,
     ) {
         repeat(4) {
             DrawLamps(list[it], modifier, "$tag$it")
         }
     }
-
 }
 
 @Composable
 fun DrawLamps(lamp: Lamps, modifier: Modifier, tag: String) {
     Column(
         modifier = modifier
-            .padding(0.dp, 0.dp, 8.dp, 0.dp)
+            .padding(0.dp, 0.dp, 8.dp, 0.dp),
     ) {
-        drawRectangle(modifier, tag, lamp, 80)
+        DrawRectangle(modifier, tag, lamp, 80)
     }
 }
 
@@ -107,7 +110,7 @@ fun DrawNormalTime(modifier: Modifier, normalTime: String?) {
         modifier = modifier.testTag("normalTime"),
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp,
-        text = normalTime ?: ""
+        text = normalTime ?: "",
     )
 }
 
@@ -120,18 +123,18 @@ fun DrawSecondsLamp(modifier: Modifier, seconds: Lamps) {
             .clip(CircleShape)
             .border(2.dp, Color.DarkGray, CircleShape)
             .background(
-                Color(parseColor(seconds.color))
-            )
+                Color(parseColor(seconds.color)),
+            ),
     )
 }
 
 @Composable
-private fun drawRectangle(
+private fun DrawRectangle(
     modifier: Modifier,
     tag: String,
     lamp: Lamps,
     width: Int,
-    height: Int = 50
+    height: Int = 50,
 ) {
     Box(
         modifier = modifier
@@ -141,7 +144,7 @@ private fun drawRectangle(
             .clip(RectangleShape)
             .border(2.dp, Color.DarkGray, RectangleShape)
             .background(
-                Color(parseColor(lamp.color))
-            )
+                Color(parseColor(lamp.color)),
+            ),
     )
 }

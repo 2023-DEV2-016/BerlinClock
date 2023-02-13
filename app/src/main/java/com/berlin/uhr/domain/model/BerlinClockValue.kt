@@ -5,5 +5,5 @@ data class BerlinClockValue(
     val fiveHours: ArrayList<Lamps>,
     val oneHour: ArrayList<Lamps>,
     val fiveMinutes: ArrayList<Lamps>,
-    val oneMinute: ArrayList<Lamps>
+    val oneMinute: ArrayList<Lamps>,
 )

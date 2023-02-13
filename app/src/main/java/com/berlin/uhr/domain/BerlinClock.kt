@@ -4,7 +4,6 @@ import com.berlin.uhr.domain.model.BerlinClockValue
 import com.berlin.uhr.domain.model.Lamps
 import javax.inject.Inject
 
-
 class BerlinClock @Inject constructor() {
 
     fun convert(time: String): BerlinClockValue {
@@ -23,9 +22,11 @@ class BerlinClock @Inject constructor() {
         val list = arrayListOf<Lamps>()
         for (i in 1..4) {
             list.add(
-                if (i <= oneMinuteLamps)
+                if (i <= oneMinuteLamps) {
                     Lamps.YELLOW
-                else Lamps.OFF
+                } else {
+                    Lamps.OFF
+                },
             )
         }
         return list
@@ -37,11 +38,14 @@ class BerlinClock @Inject constructor() {
         for (i in 1..11) {
             list.add(
                 if (i <= fiveMinutesLamps) {
-                    if(i % 3 == 0)
+                    if (i % 3 == 0) {
                         Lamps.RED
-                    else Lamps.YELLOW
-                }
-                else Lamps.OFF
+                    } else {
+                        Lamps.YELLOW
+                    }
+                } else {
+                    Lamps.OFF
+                },
             )
         }
         return list
@@ -59,15 +63,17 @@ class BerlinClock @Inject constructor() {
         val list = arrayListOf<Lamps>()
         for (i in 1..4) {
             list.add(
-                if (i <= hourLamps)
+                if (i <= hourLamps) {
                     Lamps.RED
-                else Lamps.OFF
+                } else {
+                    Lamps.OFF
+                },
             )
         }
         return list
     }
 
     private fun convertSeconds(seconds: Int): Lamps {
-        return if(seconds % 2 == 0) Lamps.RED else Lamps.OFF
+        return if (seconds % 2 == 0) Lamps.RED else Lamps.OFF
     }
 }

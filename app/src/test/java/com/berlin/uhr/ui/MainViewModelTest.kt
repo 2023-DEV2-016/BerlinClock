@@ -9,7 +9,6 @@ import kotlinx.coroutines.test.*
 import org.junit.*
 import org.junit.Assert.assertEquals
 
-
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainViewModelTest {
 
@@ -41,5 +40,4 @@ class MainViewModelTest {
         assertEquals(uiState, viewModel.berlinClockState.value)
         job.cancel()
     }
-
 }
